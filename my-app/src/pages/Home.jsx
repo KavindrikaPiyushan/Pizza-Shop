@@ -13,6 +13,9 @@ export default function Home() {
   const images = [
     "https://img.freepik.com/free-photo/top-view-pepperoni-pizza-with-mushroom-sausages-bell-pepper-olive-corn-black-wooden_141793-2158.jpg",
     "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
+    "https://www.justspices.co.uk/media/magefan_blog/shutterstock_1048511935.jpg",
+    "https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/ecaeb2cc-a950-4645-a648-9137305b3287/Derivates/df977b90-193d-49d4-a59d-8dd922bcbf65.jpg"
+
   ];
 
   useEffect(() => {
@@ -24,10 +27,10 @@ export default function Home() {
   }, []);
 
   const pizzas = [
-    { id: 1, name: "Margherita", price: 1200, image: "https://images.unsplash.com/photo-1594007654729-407eedc4be13" },
-    { id: 2, name: "Pepperoni", price: 1400, image: "https://images.unsplash.com/photo-1604917869287-d9f82e500f9b" },
+    { id: 1, name: "Margherita", price: 1200, image: "https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/ecaeb2cc-a950-4645-a648-9137305b3287/Derivates/df977b90-193d-49d4-a59d-8dd922bcbf65.jpg" },
+    { id: 2, name: "Pepperoni", price: 1400, image: "https://www.allrecipes.com/thmb/fFW1o307WSqFFYQ3-QXYVpnFj6E=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/48727-Mikes-homemade-pizza-DDMFS-beauty-4x3-BG-2974-a7a9842c14e34ca699f3b7d7143256cf.jpg" },
     { id: 3, name: "BBQ Chicken", price: 1600, image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38" },
-    { id: 4, name: "Veggie Supreme", price: 1300, image: "https://images.unsplash.com/photo-1588315029754-07bc11e1cc47" },
+    { id: 4, name: "Veggie Supreme", price: 1300, image: "https://www.justspices.co.uk/media/magefan_blog/shutterstock_1048511935.jpg" },
   ];
 
   // Customer Reviews Data
