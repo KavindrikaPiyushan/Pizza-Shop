@@ -11,6 +11,7 @@ import Cart from "./components/customer/Cart";
 import StockPage from "./pages/owner/StockPage";
 import ProtectedRoute from "./components/owner/ProtectedRoute"; 
 import ViewOrders from "./pages/owner/ViewOrders";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   const [user, setUser] = useState(null); // Stores user info (role-based)
@@ -57,7 +58,7 @@ function App() {
           } 
         />
 
-        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+        <Route path="*" element={<PageNotFound/>} />
       </Routes>
     </div>
   );
