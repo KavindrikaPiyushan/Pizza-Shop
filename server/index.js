@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json()); // Parse JSON bodies
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/pizzaApp', {
+mongoose.connect('mongodb+srv://kavin:JlyMr2StjWeN7IjR@cluster0.1wozl.mongodb.net/test_user?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
