@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
@@ -9,6 +9,7 @@ export default function Home() {
   const [selectedPizza, setSelectedPizza] = useState(null);
   const [cart, setCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const exploreMenuRef = useRef(null);
 
   const images = [
     "https://img.freepik.com/free-photo/top-view-pepperoni-pizza-with-mushroom-sausages-bell-pepper-olive-corn-black-wooden_141793-2158.jpg",
@@ -81,6 +82,12 @@ export default function Home() {
     navigate("/cart"); // Navigate to the cart page
   };
 
+  const scrollToMenu = () => {
+    if (exploreMenuRef.current) {
+      exploreMenuRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen">
       {/* Hero Section */}
@@ -96,8 +103,8 @@ export default function Home() {
         <div className="z-10 text-center">
           <h1 className="text-5xl font-bold">Delicious Pizzas, Delivered Hot!</h1>
           <p className="text-lg mt-3">Order your favorite pizza in just a few clicks.</p>
-          <button className="mt-5 px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-lg rounded-lg">
-            Order Now
+          <button className="mt-5 px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-lg rounded-lg" onClick={scrollToMenu}>
+            Explore Now
           </button>
         </div>
       </div>
@@ -135,7 +142,7 @@ export default function Home() {
      
 
       {/* Pizza Menu Section */}
-      <div className="container mx-auto py-12">
+      <div className="container mx-auto py-12" ref={exploreMenuRef}>
         <h2 className="text-3xl font-bold text-center mb-6">Explore Our Menu</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4">
           {pizzas.map((pizza) => (
