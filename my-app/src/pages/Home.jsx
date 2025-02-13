@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Footer from "../components/Footer";
 
 export default function Home() {
-  const navigate = useNavigate();  // Hook to navigate to other pages
+  const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPizza, setSelectedPizza] = useState(null);
@@ -28,6 +28,28 @@ export default function Home() {
     { id: 2, name: "Pepperoni", price: 1400, image: "https://images.unsplash.com/photo-1604917869287-d9f82e500f9b" },
     { id: 3, name: "BBQ Chicken", price: 1600, image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38" },
     { id: 4, name: "Veggie Supreme", price: 1300, image: "https://images.unsplash.com/photo-1588315029754-07bc11e1cc47" },
+  ];
+
+  // Customer Reviews Data
+  const reviews = [
+    { name: "John Doe", rating: 5, review: "Best pizza I've ever had! Will definitely order again." },
+    { name: "Jane Smith", rating: 4, review: "Great flavors, but the crust could be a bit crispier." },
+    { name: "Emma Brown", rating: 5, review: "Absolutely love the BBQ chicken pizza! Highly recommend." },
+  ];
+
+  // Featured Pizza of the Day
+  const featuredPizza = {
+    name: "Hawaiian",
+    price: 1500,
+    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38", // Replace with actual image
+    description: "A tropical delight with pineapple, ham, and a hint of sweetness.",
+  };
+
+  // Special Offers Section
+  const offers = [
+    { title: "Buy 1 Get 1 Free", description: "Enjoy a free pizza with the purchase of any large pizza." },
+    { title: "10% Off on Orders Above Rs. 3000", description: "Get 20% off on your total order when you spend over Rs. 3000." },
+    { title: "20% Off on Orders Above Rs. 7000", description: "Get 20% off on your total order when you spend over Rs. 3000." },
   ];
 
   // Open the modal for quantity selection
@@ -77,6 +99,38 @@ export default function Home() {
         </div>
       </div>
 
+      
+     
+
+      {/* Special Offers Section */}
+      <div className="container mx-auto py-12 text-center">
+        <h2 className="text-3xl font-bold mb-6">Special Offers</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {offers.map((offer, index) => (
+            <div key={index} className="bg-yellow-500 p-6 rounded-lg text-white shadow-lg">
+              <h3 className="text-2xl font-semibold">{offer.title}</h3>
+              <p className="mt-2 text-lg">{offer.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-white py-12 text-center">
+        <h2 className="text-3xl font-bold mb-6">Pizza of the Day</h2>
+        <div className="max-w-xs mx-auto">
+          <img
+            src={featuredPizza.image}
+            alt={featuredPizza.name}
+            className="w-full h-48 object-cover rounded-md mb-4"
+          />
+          <h3 className="text-2xl font-semibold">{featuredPizza.name}</h3>
+          <p className="text-lg text-gray-600 mb-4">{featuredPizza.description}</p>
+          <p className="text-xl font-bold text-red-600">Rs. {featuredPizza.price}</p>
+        </div>
+      </div>
+
+     
+
       {/* Pizza Menu Section */}
       <div className="container mx-auto py-12">
         <h2 className="text-3xl font-bold text-center mb-6">Explore Our Menu</h2>
@@ -103,13 +157,24 @@ export default function Home() {
           ))}
         </div>
       </div>
+       {/* Customer Reviews Section */}
+       <div className="container mx-auto py-12 text-center">
+        <h2 className="text-3xl font-bold mb-6">Customer Reviews</h2>
+        <div className="space-y-6">
+          {reviews.map((review, index) => (
+            <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
+              <h3 className="text-xl font-semibold">{review.name}</h3>
+              <p className="text-yellow-500 mb-2">Rating: {review.rating} / 5</p>
+              <p className="text-lg italic">"{review.review}"</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Modal for Quantity Selection */}
       {isModalOpen && selectedPizza && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black opacity-70"></div>
-          {/* Modal */}
           <div className="relative bg-white rounded-lg p-6 w-96 z-10">
             <h2 className="text-2xl font-bold mb-4">Select Quantity</h2>
             <div className="flex justify-between mb-4">
@@ -154,6 +219,8 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      <Footer />
     </div>
   );
 }

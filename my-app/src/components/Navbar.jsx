@@ -4,7 +4,7 @@ function Navbar({ user, logout }) {
   const location = useLocation(); // Get the current route
 
   return (
-    <nav className="bg-red-600 text-white p-4 shadow-md">
+    <nav className="bg-gray-900 text-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
@@ -29,12 +29,12 @@ function Navbar({ user, logout }) {
             <>
               {user.role === "owner" && (
                 <Link to="/owner-dashboard" className="hover:text-yellow-300 transition">
-                  Owner Dashboard
+                 
                 </Link>
               )}
               {user.role === "customer" && (
                 <Link to="/customer-dashboard" className="hover:text-yellow-300 transition">
-                  Customer Dashboard
+                
                 </Link>
               )}
               <button 
