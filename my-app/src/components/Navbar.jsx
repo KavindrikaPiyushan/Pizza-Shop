@@ -1,7 +1,8 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Navbar({ user, logout }) {
   const location = useLocation(); // Get the current route
+  const navigate = useNavigate(); // Hook to navigate programmatically
 
   return (
     <nav className="bg-gray-900 text-white p-4 shadow-md">
@@ -9,7 +10,7 @@ function Navbar({ user, logout }) {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <img
-            src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png" 
+            src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png"
             alt="Pizza Logo"
             className="w-10 h-10"
           />
@@ -27,16 +28,25 @@ function Navbar({ user, logout }) {
         <div className="flex items-center gap-4">
           {user ? (
             <>
-              {user.role === "owner" && (
-                <Link to="/owner-dashboard" className="hover:text-yellow-300 transition">
-                 
-                </Link>
+              {/* Dashboard Button (Hidden if already on Dashboard) */}
+              {user.role === "owner" && location.pathname !== "/owner-dashboard" && (
+                <button
+                  onClick={() => navigate("/owner-dashboard")}
+                  className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg text-white font-bold transition"
+                >
+                  Owner Dashboard
+                </button>
               )}
-              {user.role === "customer" && (
-                <Link to="/customer-dashboard" className="hover:text-yellow-300 transition">
-                
-                </Link>
+              {user.role === "customer" && location.pathname !== "/customer-dashboard" && (
+                <button
+                  onClick={() => navigate("/customer-dashboard")}
+                  className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg text-white font-bold transition"
+                >
+                  Customer Dashboard
+                </button>
               )}
+
+              {/* Logout Button */}
               <button 
                 onClick={logout} 
                 className="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-lg text-black font-bold transition"
