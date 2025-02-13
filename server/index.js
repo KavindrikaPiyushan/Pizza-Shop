@@ -3,7 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const pizzaRoutes = require('./routes/pizzaRoutes');
+const pizzaRoutes = require('./routes/PizzaRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
