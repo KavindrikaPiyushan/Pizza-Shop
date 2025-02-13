@@ -4,6 +4,8 @@ function Navbar({ user, logout }) {
   const location = useLocation(); // Get the current route
   const navigate = useNavigate(); // Hook to navigate programmatically
 
+  const isOwnerDashboard = location.pathname === "/owner-dashboard";
+
   return (
     <nav className="bg-gray-900 text-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
@@ -20,8 +22,12 @@ function Navbar({ user, logout }) {
         {/* Navigation Links */}
         <div className="hidden md:flex gap-6 text-lg">
           <Link to="/" className="hover:text-yellow-300 transition">Home</Link>
-          <Link to="/about" className="hover:text-yellow-300 transition">About</Link>
-          <Link to="/contact" className="hover:text-yellow-300 transition">Contact</Link>
+          {!isOwnerDashboard && (
+            <>
+              <Link to="/about" className="hover:text-yellow-300 transition">About</Link>
+              <Link to="/contact" className="hover:text-yellow-300 transition">Contact</Link>
+            </>
+          )}
         </div>
 
         {/* User Section */}
@@ -29,7 +35,7 @@ function Navbar({ user, logout }) {
           {user ? (
             <>
               {/* Dashboard Button (Hidden if already on Dashboard) */}
-              {user.role === "owner" && location.pathname !== "/owner-dashboard" && (
+              {user.role === "owner" && !isOwnerDashboard && (
                 <button
                   onClick={() => navigate("/owner-dashboard")}
                   className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg text-white font-bold transition"
