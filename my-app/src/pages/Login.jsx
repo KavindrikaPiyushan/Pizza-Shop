@@ -14,13 +14,18 @@ function Login({ login }) {
     } else if (email === "customer@example.com" && password === "password" && role === "customer") {
       login("customer");
       navigate("/customer-dashboard");
-    } else {
+    }else if (email === "employee@example.com" && password === "password" && role === "employee") {
+      login("customer");
+      navigate("/employee");
+    }
+    
+    else {
       alert("Invalid credentials or role selection");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-red-100 ">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-96">
         <h2 className="text-3xl font-bold text-red-600 text-center mb-6">🍕 Pizza Shop Login</h2>
         
@@ -55,6 +60,7 @@ function Login({ login }) {
           >
             <option value="customer">Customer</option>
             <option value="owner">Owner</option>
+            <option value="employee">Employee</option>
           </select>
         </div>
 

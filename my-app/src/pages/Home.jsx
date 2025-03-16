@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
+import {getAllPizzas} from "../service/Pizza";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ export default function Home() {
   const [cart, setCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const exploreMenuRef = useRef(null);
+
+
 
   const images = [
     "https://img.freepik.com/free-photo/top-view-pepperoni-pizza-with-mushroom-sausages-bell-pepper-olive-corn-black-wooden_141793-2158.jpg",
@@ -88,10 +91,15 @@ export default function Home() {
     }
   };
 
+
+  useEffect(()=>{
+      getAllPizzas().then()
+  },[])
+
   return (
     <div className="bg-gray-100 min-h-screen">
       {/* Hero Section */}
-      <div className="relative h-[60vh] bg-cover bg-center flex items-center justify-center text-white overflow-hidden">
+      <div className="relative h-[70vh]   flex  items-center justify-center text-white overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out transform"
           style={{

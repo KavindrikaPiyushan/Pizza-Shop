@@ -1,4 +1,5 @@
 import React from "react";
+import Logo from "../assets/logo.jpg";
 
 export default function Footer() {
   return (
@@ -9,9 +10,9 @@ export default function Footer() {
           {/* Logo & Description */}
           <div className="flex flex-col items-center md:items-start mb-8 md:mb-0 w-full md:w-1/3">
             <img
-              src="https://www.shutterstock.com/shutterstock/photos/2461273959/display_1500/stock-vector-pizzeria-vintage-vector-logo-white-background-2461273959.jpg"
+              src={Logo}
               alt="Pizza Heaven Logo"
-              className="w-40 mb-4 rounded-[20px] "
+              className="w-40 mb-4 rounded-[100%] "
             />
             <p className="text-center md:text-left text-lg text-gray-300">
               The best pizza in town, delivered hot and fresh right to your door.

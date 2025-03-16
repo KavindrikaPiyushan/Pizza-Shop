@@ -1,4 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Logo from "../assets/logo.jpg"
 
 function Navbar({ user, logout }) {
   const location = useLocation(); // Get the current route
@@ -7,23 +8,24 @@ function Navbar({ user, logout }) {
   const isOwnerDashboard = location.pathname === "/owner-dashboard";
 
   return (
-    <nav className="bg-gray-900 text-white p-4 shadow-md">
+    <nav className=" text-black p-4 shadow-md py-5 ">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <img
-            src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png"
+            src={Logo}
             alt="Pizza Logo"
-            className="w-10 h-10"
+            className="w-10 h-10 rounded-[100%]"
           />
           <span className="text-2xl font-bold">PizzaShop</span>
         </Link>
 
         {/* Navigation Links */}
-        <div className="hidden md:flex gap-6 text-lg">
+        <div className="hidden md:flex gap-6 text-lg font-semibold">
           <Link to="/" className="hover:text-yellow-300 transition">Home</Link>
           {!isOwnerDashboard && (
             <>
+              <Link to="/menu" className="hover:text-yellow-300 transition">Menu</Link>
               <Link to="/about" className="hover:text-yellow-300 transition">About</Link>
               <Link to="/contact" className="hover:text-yellow-300 transition">Contact</Link>
             </>

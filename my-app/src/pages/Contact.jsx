@@ -1,10 +1,11 @@
 import React from "react";
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import Footer from "../components/Footer";
 
 export default function Contact() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
-      {/* Title */}
+    <div className=" pt-8 bg-gray-50 ">
+    <div className=" flex flex-col items-center bg-gray-50  min-h-screen ">
+      
       <h1 className="text-4xl font-extrabold text-gray-800 mb-8">Get in Touch</h1>
       
       {/* Contact Container */}
@@ -57,24 +58,8 @@ export default function Contact() {
         </form>
       </div>
 
-      {/* Contact Info Section */}
-      <div className="mt-8 text-center">
-        <h2 className="text-2xl font-bold text-gray-800">Contact Information</h2>
-        <p className="text-gray-600 mt-2">We are available 24/7 to serve you the best pizzas in town!</p>
-
-        <div className="mt-4 space-y-3 text-lg text-gray-700">
-          <p className="flex items-center justify-center gap-2"><FaPhone className="text-yellow-500" /> +94 75 672 0966</p>
-          <p className="flex items-center justify-center gap-2"><FaEnvelope className="text-yellow-500" /> support@pizzashop.com</p>
-          <p className="flex items-center justify-center gap-2"><FaMapMarkerAlt className="text-yellow-500" /> 123 Pizza Street, Colombo, Sri Lanka</p>
-        </div>
-      </div>
-
-      {/* Social Media Links */}
-      <div className="mt-6 flex gap-6 text-2xl">
-        <a href="#" className="text-blue-600 hover:text-blue-800"><FaFacebook /></a>
-        <a href="#" className="text-pink-600 hover:text-pink-800"><FaInstagram /></a>
-        <a href="#" className="text-blue-400 hover:text-blue-600"><FaTwitter /></a>
-      </div>
+    </div>
+    <Footer/>
     </div>
   );
 }

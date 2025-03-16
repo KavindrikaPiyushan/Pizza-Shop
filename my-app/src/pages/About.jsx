@@ -1,7 +1,9 @@
 import React from "react";
+import Footer from "../components/Footer";
 
 export default function About() {
   return (
+    <div>
     <div className="bg-gray-100 min-h-screen p-8">
       {/* About Section */}
       <div className="max-w-4xl mx-auto text-center">
@@ -37,14 +39,17 @@ export default function About() {
           ))}
         </div>
       </div>
+      
+    </div>
+    <Footer/>
     </div>
   );
 }
 
 const teamMembers = [
-  { name: "John Doe", role: "Founder & CEO", image: "https://via.placeholder.com/150" },
-  { name: "Jane Smith", role: "Head Chef", image: "https://via.placeholder.com/150" },
-  { name: "Mike Johnson", role: "Operations Manager", image: "https://via.placeholder.com/150" },
+  { name: "John Doe", role: "Founder & CEO", image: "https://cms-bitzazz-prod-images.s3.amazonaws.com/Commercial_Realtor_Bellevue_e66cf6dd82.png" },
+  { name: "Jane Smith", role: "Head Chef", image: "https://eyemediastudios.co.uk/wp-content/uploads/2021/02/photography-8-4.jpg" },
+  { name: "Mike Johnson", role: "Operations Manager", image: "https://s3.ca-central-1.amazonaws.com/subphoto-photos/2018-10-25_16-41-21/small_069d54_2018_Besney_Jonathan-9837.jpg" },
 ];
 
 const reviews = [

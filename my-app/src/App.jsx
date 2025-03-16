@@ -12,6 +12,12 @@ import StockPage from "./pages/owner/StockPage";
 import ProtectedRoute from "./components/owner/ProtectedRoute"; 
 import ViewOrders from "./pages/owner/ViewOrders";
 import PageNotFound from "./components/PageNotFound";
+import Employee from "../src/pages/Employee";
+import TestHome from "../src/pages/TestHome";
+import Menu from "./pages/customer/Menu";
+import OrderList from "./components/owner/OrderList"
+
+
 
 function App() {
   const [user, setUser] = useState(null); // Stores user info (role-based)
@@ -29,6 +35,10 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login login={login} />} />
+        <Route path="/employee" element={<Employee />} />
+        <Route path="/test" element={<TestHome/>} ></Route>
+        <Route path="/menu" element={<Menu/>} ></Route>
+        
 
         {/* Protected Route for Stock Page */}
         <Route 
@@ -52,9 +62,9 @@ function App() {
         <Route 
           path="/orders" 
           element={
-            <ProtectedRoute user={user}>
-              <ViewOrders />  {/* Only accessible to owners */}
-            </ProtectedRoute>
+           
+              <OrderList />  
+            
           } 
         />
 

@@ -1,50 +1,43 @@
 # Node.js dependencies
-/node_modules/
+node_modules/
+package-lock.json
+yarn.lock
 
-# Build output
-/dist/
-/build/
+# Environment Variables
+.env
 
 # Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+.log
 
-# OS-specific files
+# Editor/IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# OS files
 .DS_Store
 Thumbs.db
 
-# Environment files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# MongoDB-related files
+dump/
+*.json
+*.bson
+*.gz
 
-# Vscode settings
-.vscode/
-
-# Coverage directory used by testing tools
-/coverage/
-
-# SASS/SCSS cache
-.sass-cache/
-
-# Dependency directories
-jspm_packages/
-
-# Tye (optional, if using it)
-/.tye/
-
-# Next.js build files (optional, if using Next.js)
-.next/
-
-# Firebase hosting (optional, if using Firebase)
-.firebaserc
-firebase.json
-
-# Package lock file (optional, if using yarn, otherwise ignore it)
-package-lock.json
-
-# Webpack cache (optional, if using Webpack)
+# Build and cache
+dist/
+build/
+coverage/
 .cache/
+
+# Misc
+*.bak
+*.tmp
