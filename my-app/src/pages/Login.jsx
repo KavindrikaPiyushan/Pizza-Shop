@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API,{setAccessToken} from "../api/api";
 
 function Login({ login }) {
   const [email, setEmail] = useState("");
@@ -7,21 +8,30 @@ function Login({ login }) {
   const [role, setRole] = useState("customer"); // Default role
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (email === "owner@example.com" && password === "password" && role === "owner") {
-      login("owner");
-      navigate("/owner-dashboard");
-    } else if (email === "customer@example.com" && password === "password" && role === "customer") {
-      login("customer");
-      navigate("/customer-dashboard");
-    }else if (email === "employee@example.com" && password === "password" && role === "employee") {
-      login("customer");
-      navigate("/employee");
+  const handleLogin = async (e) => {
+  
+    try{
+        const res = await API.post("/api/auth/login",{email,password});
+        setAccessToken(res.data.AccessToken);
+        localStorage.setItem("role",res.data.role.trim());
+       console.log("role",res.data.role);
+       let role = res.data.role;
+
+       if(role ==="owner"){
+        navigate("/owner-dashboard");
+        login("owner");
+        
+       }else if(role ==="customer"){
+        navigate("/customer-dashboard");
+        login("customer");
+       }else if( role ==="employee"){
+        login("employee");
+        navigate("/employee");
+       }
     }
-    
-    else {
-      alert("Invalid credentials or role selection");
-    }
+    catch(error){
+      alert("Invalid credentials or role selection"); 
+    }    
   };
 
   return (

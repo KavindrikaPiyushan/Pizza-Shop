@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
-import {getAllPizzas} from "../service/Pizza";
+
 
 export default function Home() {
   const navigate = useNavigate();
@@ -91,10 +91,6 @@ export default function Home() {
     }
   };
 
-
-  useEffect(()=>{
-      getAllPizzas().then()
-  },[])
 
   return (
     <div className="bg-gray-100 min-h-screen">
