@@ -2,9 +2,19 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const authRoutes = require('./src/routes/authRoutes');
+const imgRoutes = require('./src/routes/imgRoutes');
 const {errorHandler} = require('./src/middleware/errorHandler')
+const cloudinary = require('cloudinary').v2;
+
 
 const app = express();
+
+cloudinary.config({
+  cloud_name: 'dvt5ubo1q',
+  api_key: '892265382541189',
+  api_secret: 'mMqYtTEHETnpWePviobrjKK0bkA',
+});
+
 
 // CORS Configuration
 const corsOptions = {
@@ -22,6 +32,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/api/auth',authRoutes);
+app.use('/api/images',imgRoutes );
+
+
 
 app.use(errorHandler);
 

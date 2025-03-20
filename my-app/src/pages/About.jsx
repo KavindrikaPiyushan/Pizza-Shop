@@ -19,7 +19,7 @@ export default function About() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
           {teamMembers.map((member, index) => (
             <div key={index} className="bg-white shadow-lg rounded-lg p-6 text-center">
-              <img src={member.image} alt={member.name} className="w-24 h-24 mx-auto rounded-full object-cover" />
+              <img src={member.image} alt={member.name} className="w-24 h-24 mx-auto rounded-full object-cover" loading="lazy" />
               <h3 className="text-xl font-semibold mt-4">{member.name}</h3>
               <p className="text-gray-600">{member.role}</p>
             </div>

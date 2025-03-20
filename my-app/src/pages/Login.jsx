@@ -1,39 +1,46 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API,{setAccessToken} from "../api/api";
+import { useAuth } from "../context/AuthContext";
 
 function Login({ login }) {
+
+  const {isLoggedIn,setIsLoggedin} = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("customer"); // Default role
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
+    try {
+      const res = await API.post("/api/auth/login", { email, password });
   
-    try{
-        const res = await API.post("/api/auth/login",{email,password});
-        setAccessToken(res.data.AccessToken);
-        localStorage.setItem("role",res.data.role.trim());
-       console.log("role",res.data.role);
-       let role = res.data.role;
-
-       if(role ==="owner"){
+      setAccessToken(res.data.AccessToken);
+      localStorage.setItem("role", res.data.role.trim());
+  
+      let role = res.data.role;
+  
+      if (role === "owner") {
         navigate("/owner-dashboard");
         login("owner");
-        
-       }else if(role ==="customer"){
+      } else if (role === "customer") {
         navigate("/customer-dashboard");
         login("customer");
-       }else if( role ==="employee"){
-        login("employee");
+      } else if (role === "employee") {
         navigate("/employee");
-       }
+        login("employee");
+      }
+  
+      // Set isLoggedIn to true
+      setIsLoggedin(true);
+  
+      // Store isLoggedIn directly in localStorage after setting state
+      localStorage.setItem('isLoggedIn', JSON.stringify(true));
+    } catch (error) {
+      alert("Invalid credentials or role selection");
     }
-    catch(error){
-      alert("Invalid credentials or role selection"); 
-    }    
   };
-
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-96">

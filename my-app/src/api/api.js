@@ -34,6 +34,7 @@ API.interceptors.response.use(
                 error.config.headers.Authorization = `Bearer ${res.data.accessToken}`; //add new token to req headers
                 return API(error.config); // retry req with new token
             }catch{
+                localStorage.removeItem("isLoggedIn");
                 window.location.href ="/login" ; //if token fail redirect to login
             }
         }

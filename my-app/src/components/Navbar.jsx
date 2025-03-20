@@ -1,9 +1,34 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Logo from "../assets/logo.jpg"
+import Logo from "../assets/logo.jpg";
+import API from "../api/api";
+import { useAuth } from "../context/AuthContext";
 
 function Navbar({ user, logout }) {
+  const {isLoggedIn,setIsLoggedin} = useAuth();
   const location = useLocation(); // Get the current route
   const navigate = useNavigate(); // Hook to navigate programmatically
+
+  const checkCookie = () => {
+    const cookies = document.cookie;
+    console.log("Current Cookies:", cookies); // Check if refreshToken exists
+    const hasRefreshToken = cookies.includes("refreshToken");
+    if (hasRefreshToken) {
+      console.log("refreshToken still exists");
+    } else {
+      console.log("refreshToken has been removed");
+    }
+  };
+
+  const handleLogout = async () => {
+    logout();
+    const res = await API.post("/api/auth/logout");
+    // setIsLoggedin(false);
+    localStorage.removeItem('isLoggedIn');
+    // localStorage.setItem('isLoggedIn',JSON.stringify(isLoggedIn));
+    console.log("response from Logout", res);
+    checkCookie();
+
+  };
 
   const isOwnerDashboard = location.pathname === "/owner-dashboard";
 
@@ -22,12 +47,20 @@ function Navbar({ user, logout }) {
 
         {/* Navigation Links */}
         <div className="hidden md:flex gap-6 text-lg font-semibold">
-          <Link to="/" className="hover:text-yellow-300 transition">Home</Link>
+          <Link to="/" className="hover:text-yellow-300 transition">
+            Home
+          </Link>
           {!isOwnerDashboard && (
             <>
-              <Link to="/menu" className="hover:text-yellow-300 transition">Menu</Link>
-              <Link to="/about" className="hover:text-yellow-300 transition">About</Link>
-              <Link to="/contact" className="hover:text-yellow-300 transition">Contact</Link>
+              <Link to="/menu" className="hover:text-yellow-300 transition">
+                Menu
+              </Link>
+              <Link to="/about" className="hover:text-yellow-300 transition">
+                About
+              </Link>
+              <Link to="/contact" className="hover:text-yellow-300 transition">
+                Contact
+              </Link>
             </>
           )}
         </div>
@@ -45,18 +78,19 @@ function Navbar({ user, logout }) {
                   Owner Dashboard
                 </button>
               )}
-              {user.role === "customer" && location.pathname !== "/customer-dashboard" && (
-                <button
-                  onClick={() => navigate("/customer-dashboard")}
-                  className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg text-white font-bold transition"
-                >
-                  Customer Dashboard
-                </button>
-              )}
+              {user.role === "customer" &&
+                location.pathname !== "/customer-dashboard" && (
+                  <button
+                    onClick={() => navigate("/customer-dashboard")}
+                    className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg text-white font-bold transition"
+                  >
+                    Customer Dashboard
+                  </button>
+                )}
 
               {/* Logout Button */}
-              <button 
-                onClick={logout} 
+              <button
+                onClick={handleLogout}
                 className="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-lg text-black font-bold transition"
               >
                 Logout
@@ -65,8 +99,8 @@ function Navbar({ user, logout }) {
           ) : (
             // Hide Login button if on the login page
             location.pathname !== "/login" && (
-              <Link 
-                to="/login" 
+              <Link
+                to="/login"
                 className="bg-white text-red-600 px-4 py-2 rounded-lg font-bold hover:bg-gray-200 transition"
               >
                 Login

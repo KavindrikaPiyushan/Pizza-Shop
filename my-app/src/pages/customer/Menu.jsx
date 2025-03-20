@@ -60,6 +60,12 @@ export default function Menu() {
    const navigate = useNavigate();
 
   const openModal = (pizza)=>{
+    
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if(!isLoggedIn){
+      navigate("/login");
+      return;
+    }
     setSelectedPizza(pizza);
     setIsModalOpen(true);
   }
@@ -79,11 +85,12 @@ export default function Menu() {
     const totalPrice = selectedPizza.price * quantity;
     const cartItem = { ...selectedPizza, quantity, totalPrice };
     setCart((prevCart) => [...prevCart, cartItem]);
-   // Close modal after adding to cart
     navigate("/cart"); 
      closeModal(); 
+
+
   
-    // Navigate to the cart page
+    
   };
   
   useEffect(()=>{

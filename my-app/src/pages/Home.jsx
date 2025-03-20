@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
-
+import {getImagesFromFolder} from "../service/imageService";
+import Loading from "../components/Loading";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -11,16 +12,40 @@ export default function Home() {
   const [cart, setCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const exploreMenuRef = useRef(null);
+  const [loading,setLoading] = useState(true);
+
+  
+  const [images,setImages] = useState([]);
+
+  useEffect(()=>{
+       const getImages = async()=>{
+        try{
+           const data = await getImagesFromFolder("Home-Page/background-images");
+           setImages(data);
+           console.log('data',images);
+           setLoading(false);
+        }catch(error){
+            console.error('Error fetching images:', error);
+            throw error;
+            setLoading(false);
+        }
+       }
+       getImages();
+  },[]);
+  
+  useEffect(() => {
+    console.log('Updated images:', images); // This will run whenever `images` changes
+  }, [images]);
+  
 
 
+  // const images = [
+  //   "https://img.freepik.com/free-photo/top-view-pepperoni-pizza-with-mushroom-sausages-bell-pepper-olive-corn-black-wooden_141793-2158.jpg",
+  //   "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
+  //   "https://www.justspices.co.uk/media/magefan_blog/shutterstock_1048511935.jpg",
+  //   "https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/ecaeb2cc-a950-4645-a648-9137305b3287/Derivates/df977b90-193d-49d4-a59d-8dd922bcbf65.jpg"
 
-  const images = [
-    "https://img.freepik.com/free-photo/top-view-pepperoni-pizza-with-mushroom-sausages-bell-pepper-olive-corn-black-wooden_141793-2158.jpg",
-    "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
-    "https://www.justspices.co.uk/media/magefan_blog/shutterstock_1048511935.jpg",
-    "https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/ecaeb2cc-a950-4645-a648-9137305b3287/Derivates/df977b90-193d-49d4-a59d-8dd922bcbf65.jpg"
-
-  ];
+  // ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,7 +53,7 @@ export default function Home() {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [images]);
 
   const pizzas = [
     { id: 1, name: "Margherita", price: 1200, image: "https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/ecaeb2cc-a950-4645-a648-9137305b3287/Derivates/df977b90-193d-49d4-a59d-8dd922bcbf65.jpg" },
@@ -60,10 +85,17 @@ export default function Home() {
   ];
 
   // Open the modal for quantity selection
-  const openModal = (pizza) => {
+ 
+  const openModal = (pizza)=>{
+    
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if(!isLoggedIn){
+      navigate("/login");
+      return;
+    }
     setSelectedPizza(pizza);
     setIsModalOpen(true);
-  };
+  }
 
   // Close the modal
   const closeModal = () => {
@@ -94,8 +126,8 @@ export default function Home() {
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      {/* Hero Section */}
-      <div className="relative h-[70vh]   flex  items-center justify-center text-white overflow-hidden">
+      
+      {loading?(<Loading/>):(<><div className="relative h-[70vh]   flex  items-center justify-center text-white overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out transform"
           style={{
@@ -235,6 +267,9 @@ export default function Home() {
       )}
 
       <Footer />
-    </div>
+</>)}
+
+      
+          </div>
   );
 }
